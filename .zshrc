@@ -17,7 +17,7 @@ function aws_profile() {
 
 alias config='/usr/bin/git --git-dir=/Users/markus/.cfg/ --work-tree=/Users/markus'
 export GOPATH=~/Developer/go
-export PATH="/Users/markus/Developer/go/bin:$PATH:/Users/markus/bin"
+export PATH="$GOPATH/bin:$PATH"
 export AWS_PAGER=""
 
 setopt prompt_subst
@@ -26,13 +26,6 @@ PROMPT='%~$(git_branch)$(aws_profile) $ '
 autoload -U compinit
 compinit
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+export EDITOR="zed"
 
-# Created by `pipx` on 2023-10-16 09:23:45
-export PATH="$PATH:/Users/markus/.local/bin"
-eval "$(register-python-argcomplete pipx)"
-
-export MODULAR_HOME="/Users/markus/.modular"
-export PATH="/Users/markus/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
-
-export EDITOR="subl"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
