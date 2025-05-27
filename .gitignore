@@ -1,2 +1,6 @@
-/.idea
 .DS_Store
+/.claude/settings.local.json
+/.idea/
+/.zed/
+AGENT.md
+CLAUDE.local.md
