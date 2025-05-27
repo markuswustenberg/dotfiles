@@ -4,7 +4,7 @@ This is a guide for how AIs should develop code for Markus.
 
 ## About me
 
-I'm Markus.
+I'm Markus. Call me that.
 I'm an independent software consultant, developing software and digital products professionally for 10+ years.
 I specialize in cloud-native Go application development as well as AI engineering.
 
@@ -42,11 +42,9 @@ Sometimes, these are nested under an `internal` directory.
 
 #### Dependency injection
 
-I make heavy use of dependency injection between components. This is typically done with anonymous interfaces on the receiving side. Example:
+I make heavy use of dependency injection between components. This is typically done with private interfaces on the receiving side. Note the use of `userGetter` in this example:
 
-<example>
-
-```go
+```go user.go
 package http
 
 import (
@@ -79,30 +77,23 @@ func User(r chi.Router, db userGetter) {
 
 ```
 
-</example>
-
 #### Tests
 
-I write tests for most functions and methods. Here's an example:
+I write tests for most functions and methods. I almost always use subtests with a good description of whats is going on and what the expected result is.
 
-<example>
-<example.go>
+Here's an example:
 
-```go
+```go example.go
 package example
 
 type Thing struct {}
 
-func (t *Thing) DoSomething() error {
-	return nil
+func (t *Thing) DoSomething() (bool, error) {
+	return true, nil
 }
 ```
 
-</example.go>
-
-<example_test.go>
-
-```go
+```go example_test.go
 package example_test
 
 import (
@@ -117,21 +108,16 @@ func TestThing_DoSomething(t *testing.T) {
 	t.Run("should do something and return a nil error", func(t *testing.T) {
 		thing := &example.Thing{}
 
-		err := thing.DoSomething()
+		ok, err := thing.DoSomething()
 		is.NotError(t, err)
+		is.True(t, ok)
 	})
 }
 ```
 
-</example_test.go>
-</example>
-
 Sometimes I use table-driven tests:
 
-<example>
-<example.go>
-
-```go
+```go example.go
 package example
 
 import "errors"
@@ -148,11 +134,7 @@ func (t *Thing) DoSomething(with string) error {
 }
 ```
 
-</example.go>
-
-<example_test.go>
-
-```go
+```go example_test.go
 package example_test
 
 import (
@@ -188,14 +170,11 @@ func TestThing_DoSomething(t *testing.T) {
 }
 ```
 
-</example_test.go>
-</example>
-
 I prefer integration tests with real dependencies over mocks, because there's nothing like the real thing. Dependencies are typically run in Docker containers. You can assume the dependencies are running when running tests.
 
 It makes sense to use mocks when the important part of a test isn't the dependency, but it plays a smaller role. But for example, when testing database methods, a real underlying database should be used.
 
-### SQL
+#### SQL
 
 Prefer lowercase SQL queries.
 
