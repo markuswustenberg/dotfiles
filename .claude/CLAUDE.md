@@ -187,3 +187,7 @@ Run `make lint` or `golangci-lint run` to run linters.
 Run `make eval` or `go test -shuffle on -run TestEval ./...` to run LLM evals.
 
 Run `make fmt` to format all code in the project, which is useful as a last finishing touch.
+
+### Documentation
+
+You can generally look up documentation for a Go module using `go doc` with the module name. For example, `go doc net/http` for something in the standard library, or `go doc maragu.dev/gai` for a third-party module. You can also look up more specific documentation for an identifier with something like `go doc maragu.dev/gai.ChatCompleter`, for the `ChatCompleter` interface.
