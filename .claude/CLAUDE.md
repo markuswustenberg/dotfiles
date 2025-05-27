@@ -59,7 +59,7 @@ import (
 )
 
 type UserResponse struct {
-  Name string
+	Name string
 }
 
 type userGetter interface {
@@ -68,12 +68,12 @@ type userGetter interface {
 
 func User(r chi.Router, db userGetter) {
 	r.Get("/user", httph.JSONHandler(func(w http.ResponseWriter, r *http.Request, _ any) (UserResponse, error) {
-  	id := r.URL.Query().Get("id")
-    user, err := db.GetUser(r.Context(), model.ID(id))
-    if err != nil {
-      return UserResponse{}, httph.HTTPError{Code: http.StatusInternalServerError, Err: errors.New("error getting user")}
-    }
-    return UserResponse{Name: user.Name}, nil
+		id := r.URL.Query().Get("id")
+		user, err := db.GetUser(r.Context(), model.ID(id))
+		if err != nil {
+			return UserResponse{}, httph.HTTPError{Code: http.StatusInternalServerError, Err: errors.New("error getting user")}
+		}
+		return UserResponse{Name: user.Name}, nil
 	}))
 }
 
@@ -114,12 +114,12 @@ import (
 )
 
 func TestThing_DoSomething(t *testing.T) {
-  t.Run("should do something and return a nil error", func(t *testing.T) {
-    thing := &example.Thing{}
+	t.Run("should do something and return a nil error", func(t *testing.T) {
+		thing := &example.Thing{}
 
-    err := thing.DoSomething()
-    is.NotError(t, err)
-  })
+		err := thing.DoSomething()
+		is.NotError(t, err)
+	})
 }
 ```
 
@@ -141,9 +141,9 @@ type Thing struct {}
 var ErrChairNotSupported = errors.New("chairs not supported")
 
 func (t *Thing) DoSomething(with string) error {
-  if with == "chair" {
-    return ErrChairNotSupported
-  }
+	if with == "chair" {
+		return ErrChairNotSupported
+	}
 	return nil
 }
 ```
