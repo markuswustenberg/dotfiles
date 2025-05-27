@@ -45,6 +45,7 @@ Sometimes, these are nested under an `internal` directory.
 I make heavy use of dependency injection between components. This is typically done with anonymous interfaces on the receiving side. Example:
 
 <example>
+
 ```go
 package http
 
@@ -77,6 +78,7 @@ func User(r chi.Router, db userGetter) {
 }
 
 ```
+
 </example>
 
 #### Tests
@@ -85,6 +87,7 @@ I write tests for most functions and methods. Here's an example:
 
 <example>
 <example.go>
+
 ```go
 package example
 
@@ -94,9 +97,11 @@ func (t *Thing) DoSomething() error {
 	return nil
 }
 ```
+
 </example.go>
 
 <example_test.go>
+
 ```go
 package example_test
 
@@ -117,6 +122,7 @@ func TestThing_DoSomething(t *testing.T) {
   })
 }
 ```
+
 </example_test.go>
 </example>
 
@@ -124,6 +130,7 @@ Sometimes I use table-driven tests:
 
 <example>
 <example.go>
+
 ```go
 package example
 
@@ -140,9 +147,11 @@ func (t *Thing) DoSomething(with string) error {
 	return nil
 }
 ```
+
 </example.go>
 
 <example_test.go>
+
 ```go
 package example_test
 
@@ -178,6 +187,7 @@ func TestThing_DoSomething(t *testing.T) {
 	}
 }
 ```
+
 </example_test.go>
 </example>
 
