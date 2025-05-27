@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go doc)",
+      "Bash(make evaluate)",
+      "Bash(make fmt)",
+      "Bash(make lint)",
+      "Bash(make test)"
+    ],
+    "deny": []
+  },
+  "includeCoAuthoredBy": false
+}
