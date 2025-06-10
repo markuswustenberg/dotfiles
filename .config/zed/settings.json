@@ -1,0 +1,55 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "edit_predictions": {
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "theme": "One Dark",
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-latest"
+    },
+    "version": "2"
+  },
+  "autosave": "on_focus_change",
+  "base_keymap": "JetBrains",
+  "buffer_font_family": "MonoLisa",
+  "buffer_font_size": 13,
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "languages": {
+    "SQL": {
+      "format_on_save": "language_server"
+    }
+  },
+  "ui_font_family": "MonoLisa",
+  "ui_font_size": 16,
+  "context_servers": {
+    "time": {
+      "command": {
+        "path": "uvx",
+        "args": ["mcp-server-time", "--local-timezone", "UTC"]
+      }
+    }
+  }
+}
