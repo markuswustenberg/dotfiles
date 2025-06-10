@@ -50,5 +50,21 @@
   {
     "label": "Watch CSS",
     "command": "make watch-css"
+  },
+  {
+    "label": "Down",
+    "command": "make down"
+  },
+  {
+    "label": "Up",
+    "command": "make up"
+  },
+  {
+    "label": "Down tests",
+    "command": "make test-down"
+  },
+  {
+    "label": "Up tests",
+    "command": "make test-up"
   }
 ]
