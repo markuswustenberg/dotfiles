@@ -13,8 +13,6 @@ Some highlights about my professional perspective on my work:
 - I'm a big fan of "boring technology", meaning I prefer to use well-established, battle-tested technologies over trendy, cutting-edge ones.
 - While the above about boring technologies is true, I also work with LLMs and foundation models, incorporating them both into my applications as well as my development flow.
 - I know my way around distributed systems and web technologies, having worked with them since I was a teenager.
-- I have a background in traditional machine learning that I used in a PhD, but academia was not for me, and I moved to the industry.
-- I have experience with building large-scale distributed systems at Uber, but these days I prefer building smaller systems using cloud technologies.
 - I prefer SQLite and PostgreSQL for databases. I also like object stores (such as S3), queues, and load balancers, but generally don't use any other cloud primitives.
 - I don't like microservice-oriented architectures, preferring a more monolithic approach.
 
@@ -22,15 +20,14 @@ Some highlights about my professional perspective on my work:
 
 ### Go application structure
 
-Generally, I build web applications. They are monolithic and have a clear structure.
+Generally, I build web applications and libraries/modules.
 
-These are the packages typically present (some may be missing, which typically means I don't need them in the project).
-Sometimes, these are nested under an `internal` directory.
+These are the packages typically present in applications (some may be missing, which typically means I don't need them in the project).
 
 - `main`: contains the main entry point of the application (in directory `cmd/app`)
 - `model`: contains the domain model used throughout the other packages
-- `sql`: contains SQL database-related logic as well as database migrations (under directory `sql/migrations/`). The database used is either SQLite or PostgreSQL.
-- `sqltest`: package used in testing, for setting up and tearing down test databases
+- `sql`/`sqlite`/`postgres`: contains SQL database-related logic as well as database migrations (under subdirectory `migrations/`). The database used is either SQLite or PostgreSQL.
+- `sqltest`/`sqlitetest`/`postgrestest`: package used in testing, for setting up and tearing down test databases
 - `s3`: logic for interacting with Amazon S3 or compatible object stores
 - `s3test`: package used in testing, for setting up and tearing down test S3 buckets
 - `llm`: clients for interacting with large language models (LLMs) and foundation models
@@ -174,9 +171,16 @@ I prefer integration tests with real dependencies over mocks, because there's no
 
 It makes sense to use mocks when the important part of a test isn't the dependency, but it plays a smaller role. But for example, when testing database methods, a real underlying database should be used.
 
+I use test assertions with the module `maragu.dev/is`. Available functions: `is.True`, `is.Equal`, `is.Nil`, `is.NotNil`, `is.EqualSlice`, `is.NotError`, `is.Error`. All of these take an optional message as the last parameter.
+
 #### SQL
 
 Prefer lowercase SQL queries.
+
+#### Miscellaneous
+
+- Variable naming:
+  - `req` for requests, `res` for responses
 
 ### Testing, linting, evals
 
@@ -188,10 +192,14 @@ Run `make eval` or `go test -shuffle on -run TestEval ./...` to run LLM evals.
 
 Run `make fmt` to format all code in the project, which is useful as a last finishing touch.
 
-#### Bugs
+### Bugs
 
 If you think you've found a bug during testing, ask me what to do, instead of trying to work around the bug in tests.
 
 ### Documentation
 
 You can generally look up documentation for a Go module using `go doc` with the module name. For example, `go doc net/http` for something in the standard library, or `go doc maragu.dev/gai` for a third-party module. You can also look up more specific documentation for an identifier with something like `go doc maragu.dev/gai.ChatCompleter`, for the `ChatCompleter` interface.
+
+### Checking apps in a browser
+
+You can assume the app is running and available in a browser using the Playwright tool. It auto-reloads on code changes so you don't have to.
