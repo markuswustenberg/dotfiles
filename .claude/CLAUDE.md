@@ -33,7 +33,7 @@ These are the packages typically present in applications (some may be missing, w
 - `llm`: clients for interacting with large language models (LLMs) and foundation models
 - `llmtest`: package used in testing, for setting up LLM clients for testing
 - `http`: HTTP handlers for the application
-- `html`: HTML templates for the application, written with the gomponents library
+- `html`: HTML templates for the application, written with the gomponents library (see https://www.gomponents.com/llms.txt for how to use that if you need to)
 
 ### Code style
 
@@ -173,14 +173,11 @@ It makes sense to use mocks when the important part of a test isn't the dependen
 
 I use test assertions with the module `maragu.dev/is`. Available functions: `is.True`, `is.Equal`, `is.Nil`, `is.NotNil`, `is.EqualSlice`, `is.NotError`, `is.Error`. All of these take an optional message as the last parameter.
 
-#### SQL
-
-Prefer lowercase SQL queries.
-
 #### Miscellaneous
 
 - Variable naming:
   - `req` for requests, `res` for responses
+- Prefer lowercase SQL queries
 
 ### Testing, linting, evals
 
@@ -191,6 +188,8 @@ Run `make lint` or `golangci-lint run` to run linters.
 Run `make eval` or `go test -shuffle on -run TestEval ./...` to run LLM evals.
 
 Run `make fmt` to format all code in the project, which is useful as a last finishing touch.
+
+You can access the database by using `psql` or `sqlite3` in the shell.
 
 ### Bugs
 
