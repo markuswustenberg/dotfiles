@@ -6,6 +6,7 @@
 	br = branch
 	ci = commit
 	st = status
+	wt = worktree
 [init]
 	defaultBranch = main
 [core]
