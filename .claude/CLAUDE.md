@@ -173,23 +173,36 @@ It makes sense to use mocks when the important part of a test isn't the dependen
 
 I use test assertions with the module `maragu.dev/is`. Available functions: `is.True`, `is.Equal`, `is.Nil`, `is.NotNil`, `is.EqualSlice`, `is.NotError`, `is.Error`. All of these take an optional message as the last parameter.
 
+Since tests are shuffled, don't rely on test order, even for subtests.
+
+Every time the `postgrestest.NewDatabase(t)`/`sqlitetest.NewDatabase(t)` test helpers are called, the database is in a clean state (no leftovers from other tests etc.).
+
 #### Miscellaneous
 
 - Variable naming:
   - `req` for requests, `res` for responses
 - Prefer lowercase SQL queries
+- There are SQL helpers available, at `Database.H.Select`, `Database.H.Exec`, `Database.H.Get`, `Database.H.InTransaction`.
+- Use the `any` builtin in Go instead of `interface{}`
+- There's an alias for `sql.ErrNoRows` from stdlib at `maragu.dev/glue/sql.ErrNoRows`, so you don't have to import both
+- In tests, use `t.Context()` instead of `context.Background()`
+- Test helper functions should call `testing.T.Helper()`
 
 ### Testing, linting, evals
 
 Run `make test` or `go test -shuffle on ./...` to run all tests. To run tests in just one package, use `go test -shuffle on ./path/to/package`. To run a specific test, use `go test ./path/to/package -run TestName`.
 
-Run `make lint` or `golangci-lint run` to run linters.
+Run `make lint` or `golangci-lint run` to run linters. They should always be run on the package/directory level, it often won't work with single files.
 
 Run `make eval` or `go test -shuffle on -run TestEval ./...` to run LLM evals.
 
 Run `make fmt` to format all code in the project, which is useful as a last finishing touch.
 
 You can access the database by using `psql` or `sqlite3` in the shell.
+
+### Version control
+
+When writing commit messages, surround identifier names (variable names, type names, etc.) in backticks.
 
 ### Bugs
 
@@ -202,3 +215,4 @@ You can generally look up documentation for a Go module using `go doc` with the 
 ### Checking apps in a browser
 
 You can assume the app is running and available in a browser using the Playwright tool. It auto-reloads on code changes so you don't have to.
+Log output from the running application is in `app.log` in the project root.
